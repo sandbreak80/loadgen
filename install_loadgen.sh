@@ -42,8 +42,7 @@ pip3 install webdriver-manager
 wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chromedriver-linux64.zip -P /home/ubuntu/load
 
 # Unzip chromedriver to the specified directory
-mkdir /home/ubuntu/load/chromedriver-linux64
-sudo unzip /home/ubuntu/load/chromedriver-linux64.zip -d /home/ubuntu/load/
+sudo unzip /home/ubuntu/load/chromedriver-linux64.zip -d /home/ubuntu/load
 
 # Make chromedriver executable
 sudo chmod +x /home/ubuntu/load/chromedriver-linux64/chromedriver
