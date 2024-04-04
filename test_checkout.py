@@ -29,7 +29,7 @@ class MyTestCase(unittest.TestCase):
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
     def test_checkout(self):
-      for _ in range(1000):  # Loop the test 1000 times
+      for i in range(1000):  # Loop the test 1000 times
         start_time = time.time()  # Start time measurement
         self.driver.get("https://localhost:8783/konakart/Welcome.action")
         WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located((By.CSS_SELECTOR, ".item-area:nth-child(4) .item-area-title")))
