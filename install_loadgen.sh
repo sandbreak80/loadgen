@@ -22,10 +22,10 @@ sudo apt update
 sudo apt install -y wget gnupg2 unzip
 
 # Download Google Chrome .deb package
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P /home/ubuntu/load
+sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P /home/ubuntu/load
 
 # Install Google Chrome
-sudo dpkg -i -P /home/ubuntu/load/google-chrome-stable_current_amd64.deb
+sudo dpkg -i /home/ubuntu/load/google-chrome-stable_current_amd64.deb
 
 # Install any missing dependencies
 sudo apt -f install -y
@@ -37,9 +37,10 @@ sudo apt install -y python3-pip
 pip3 install requests beautifulsoup4
 pip3 install selenium
 pip3 install webdriver-manager
+pip3 install pytest
 
 # Download chromedriver
-wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chromedriver-linux64.zip -P /home/ubuntu/load
+sudo wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chromedriver-linux64.zip -P /home/ubuntu/load
 
 # Unzip chromedriver to the specified directory
 sudo unzip /home/ubuntu/load/chromedriver-linux64.zip -d /home/ubuntu/load
