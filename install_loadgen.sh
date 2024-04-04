@@ -22,10 +22,10 @@ sudo apt update
 sudo apt install -y wget gnupg2 unzip
 
 # Download Google Chrome .deb package
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P /home/ubuntu/load
 
 # Install Google Chrome
-sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo dpkg -i -P /home/ubuntu/load/google-chrome-stable_current_amd64.deb
 
 # Install any missing dependencies
 sudo apt -f install -y
@@ -43,7 +43,7 @@ wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linu
 
 # Unzip chromedriver to the specified directory
 mkdir /home/ubuntu/load/chromedriver-linux64
-unzip /home/ubuntu/load/chromedriver_linux64.zip -d /home/ubuntu/load/chromedriver-linux64/
+unzip /home/ubuntu/load/chromedriver-linux64.zip -d /home/ubuntu/load/chromedriver-linux64/
 
 # Make chromedriver executable
 sudo chmod +x /home/ubuntu/load/chromedriver-linux64/chromedriver
