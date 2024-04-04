@@ -31,7 +31,7 @@ class MyTestCase(unittest.TestCase):
     def test_checkout(self):
       for _ in range(1000):  # Loop the test 1000 times
         start_time = time.time()  # Start time measurement
-        self.driver.get("https://ec2-35-88-117-78.us-west-2.compute.amazonaws.com:8783/konakart/Welcome.action")
+        self.driver.get("https://localhost:8783/konakart/Welcome.action")
         WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located((By.CSS_SELECTOR, ".item-area:nth-child(4) .item-area-title")))
         #self.driver.set_window_size(1414, 819)
         self.driver.find_element(By.LINK_TEXT, "Acctim Metal Clock").click()
