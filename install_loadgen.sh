@@ -9,8 +9,11 @@ fi
 # Update package index
 sudo apt update
 
+# Create loadgen directory
+#mkdir -p /home/ubuntu/loadgen
+
 # Download git project
-/home/ubuntu/loadgen/git clone https://github.com/sandbreak80/loadgen.git
+#/home/ubuntu/loadgen/git clone https://github.com/sandbreak80/loadgen.git
 
 # Install wget, gnupg2, and unzip
 sudo apt install -y wget gnupg2 unzip
@@ -30,17 +33,15 @@ sudo apt install -y python3-pip
 # Install Python packages using pip3
 pip3 install requests beautifulsoup4
 pip3 install selenium
-
-# Create loadgen directory
-mkdir -p /home/ubuntu/loadgen
+pip3 install webdriver-manager
 
 # Download chromedriver
-wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip -P /home/ubuntu/loadgen
+wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chromedriver-linux64.zip -P /home/ubuntu/load
 
 # Unzip chromedriver to the specified directory
-unzip /home/ubuntu/loadgen/chromedriver_linux64.zip -d /home/ubuntu/loadgen/chromedriver-linux64/
+unzip /home/ubuntu/loadgen/chromedriver_linux64.zip -d /home/ubuntu/load/chromedriver-linux64/
 
 # Make chromedriver executable
-sudo chmod +x /home/ubuntu/loadgen/chromedriver-linux64/chromedriver
+sudo chmod +x /home/ubuntu/load/chromedriver-linux64/chromedriver
 
 echo "Setup completed successfully!"
