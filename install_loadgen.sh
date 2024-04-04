@@ -6,14 +6,17 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
-# Update package index
-sudo apt update
-
 # Create loadgen directory
-#mkdir -p /home/ubuntu/loadgen
+chmod +x install_loadgen.sh
+mkdir -p /home/ubuntu/load
 
 # Download git project
-#/home/ubuntu/loadgen/git clone https://github.com/sandbreak80/loadgen.git
+git clone https://github.com/sandbreak80/loadgen.git /home/ubuntu/load/
+
+chmod +x /home/ubuntu/load/*.sh
+
+# Update package index
+sudo apt update
 
 # Install wget, gnupg2, and unzip
 sudo apt install -y wget gnupg2 unzip
