@@ -13,13 +13,7 @@ LoadGen creates synthetic user activity on KonaKart e-commerce applications to g
 
 ## Installation
 
-### Step 1: SSH Into Your Lab Instance
-
-```bash
-ssh -i your-key.pem ubuntu@your-instance-hostname
-```
-
-### Step 2: Download and Install
+### Download and Install
 
 ```bash
 # Download the installation script
