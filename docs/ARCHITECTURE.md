@@ -19,12 +19,12 @@ LoadGen supports two deployment modes with automatic environment detection.
 
 **Detection Logic:**
 ```python
-ec2_public_hostname = get_ec2_public_hostname()
+ec2_public_hostname = get_ec2_public_hostname()  # e.g., "ec2-54-70-243-207.us-west-2.compute.amazonaws.com"
 if ec2_public_hostname:
-    # Won't find ec2metadata on local machine
-    base_url = None
+    # Found EC2 metadata - use public hostname to test itself
+    base_url = f"https://{ec2_public_hostname}:8783/konakart/Welcome.action"
 else:
-    # Use config.TARGET_URL
+    # Not on EC2 - use configured target
     base_url = config.TARGET_URL  # e.g., https://34.216.65.98:8783/konakart/...
 ```
 
@@ -53,10 +53,10 @@ else:
 ```python
 ec2_public_hostname = get_ec2_public_hostname()  # Gets ec2metadata --public-hostname
 if ec2_public_hostname:
-    # Found EC2 metadata - running on AWS
-    base_url = f"http://{ec2_public_hostname}:8780/konakart/Welcome.action"
+    # Found EC2 metadata - test itself via public hostname
+    base_url = f"https://{ec2_public_hostname}:8783/konakart/Welcome.action"
 else:
-    # Not on EC2
+    # Not on EC2 - use configured target
     base_url = config.TARGET_URL
 ```
 
@@ -69,12 +69,15 @@ else:
 
 ## Port Configuration
 
-| Mode | Protocol | Port | Reason |
-|------|----------|------|--------|
-| **Remote access** (local dev → AWS) | HTTPS | 8783 | SSL for external access |
-| **Local access** (AWS → itself) | HTTP | 8780 | No SSL needed for localhost |
+| Mode | Protocol | Port | Connection |
+|------|----------|------|------------|
+| **Local dev → AWS** | HTTPS | 8783 | Remote instance via public IP |
+| **AWS → itself** | HTTPS | 8783 | Same instance via public hostname |
 
-This is standard practice: external clients use HTTPS, localhost uses HTTP.
+**Note:** AWS instances test themselves via their **public hostname** (not localhost) to:
+- Avoid SSL certificate issues with localhost
+- Match how external clients access the service
+- Generate realistic observability telemetry
 
 ---
 

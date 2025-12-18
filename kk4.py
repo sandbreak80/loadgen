@@ -25,8 +25,9 @@ def get_ec2_public_hostname():
 # Otherwise use the configured target URL
 ec2_public_hostname = get_ec2_public_hostname()
 if ec2_public_hostname:
+    # Use public hostname to test itself - avoids localhost SSL issues
     base_url = f"https://{ec2_public_hostname}:8783/konakart/Welcome.action"
-    print(f"Running on EC2, testing local instance: {base_url}")
+    print(f"Running on EC2, testing instance via public hostname: {base_url}")
 else:
     # Use configured URL from config.py
     base_url = config.TARGET_URL

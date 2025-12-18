@@ -47,9 +47,9 @@ class MyTestCase(unittest.TestCase):
         # Determine target URL: use EC2 local instance if available, otherwise use config
         ec2_public_hostname = get_ec2_public_hostname()
         if ec2_public_hostname:
-            # Running on AWS - test the local instance
+            # Running on AWS - test itself via public hostname (avoids localhost SSL issues)
             self.target_url = f"https://{ec2_public_hostname}:8783/konakart/Welcome.action"
-            print(f"Running on EC2, testing local instance: {self.target_url}")
+            print(f"Running on EC2, testing instance via public hostname: {self.target_url}")
         else:
             # Running locally - use configured URL from config.py
             self.target_url = config.TARGET_URL

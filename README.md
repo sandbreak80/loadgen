@@ -42,7 +42,7 @@ sudo /home/ubuntu/load/stopload.sh
 
 When running on an AWS instance:
 - **Auto-detects** EC2 environment using `ec2metadata`
-- **Tests the local instance** (itself) via localhost
+- **Tests itself** via its public hostname (avoids localhost SSL issues)
 - **Generates 20 concurrent sessions:**
   - 10 web crawlers discovering and visiting pages
   - 10 checkout flows completing purchases
@@ -60,8 +60,8 @@ See [docs/SETUP.md](docs/SETUP.md) for local development instructions.
 
 LoadGen automatically adapts to its environment:
 
-- **On AWS EC2:** Tests the local KonaKart instance (localhost:8783 HTTPS)
-- **Local Dev:** Targets remote instances via configuration (port 8783 HTTPS)
+- **On AWS EC2:** Tests itself via public hostname (https://ec2-hostname:8783)
+- **Local Dev:** Targets remote instances via configuration (https://target:8783)
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture documentation.
 
