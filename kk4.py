@@ -1,4 +1,5 @@
 import subprocess
+import sys
 import time
 from urllib.parse import urljoin, urlparse
 from selenium import webdriver
@@ -133,8 +134,20 @@ def crawl(url, base_domain):
 # Get the domain of the base URL
 base_domain = urlparse(base_url).netloc
 
-# Start crawling the website
-crawl(base_url, base_domain)
-
-# Close the driver
-driver.quit()
+# Continuously crawl the website (infinite loop for load generation)
+print(f"Starting continuous crawling of {base_url}")
+iteration = 0
+while True:
+    iteration += 1
+    print(f"\n=== Crawl Iteration {iteration} ===")
+    
+    # Reset visited URLs for each iteration
+    visited_urls.clear()
+    
+    # Start crawling the website
+    crawl(base_url, base_domain)
+    
+    print(f"=== Completed iteration {iteration}, restarting... ===\n")
+    
+    # Small delay between iterations
+    time.sleep(1)
