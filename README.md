@@ -98,7 +98,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture docum
   5. Confirm billing
   6. Complete order
   7. Logout
-- Repeats 1000 times per instance
+- Runs continuously (infinite loop) until stopped
 
 ## Requirements
 

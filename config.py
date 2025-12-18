@@ -25,6 +25,9 @@ CHROMEDRIVER_PATH = os.getenv('CHROMEDRIVER_PATH', None)  # None = auto-detect
 # Load generation settings
 CRAWLER_INSTANCES = int(os.getenv('CRAWLER_INSTANCES', '10'))
 CHECKOUT_INSTANCES = int(os.getenv('CHECKOUT_INSTANCES', '10'))
+
+# Note: Checkout tests now run indefinitely (infinite loop)
+# This setting is kept for backwards compatibility but not used on AWS
 CHECKOUT_ITERATIONS = int(os.getenv('CHECKOUT_ITERATIONS', '1000'))
 
 # Timeouts

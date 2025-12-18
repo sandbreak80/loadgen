@@ -56,7 +56,10 @@ class MyTestCase(unittest.TestCase):
             print(f"Testing against configured target: {self.target_url}")
 
     def test_checkout(self):
-      for i in range(config.CHECKOUT_ITERATIONS):  # Loop based on config
+      # Infinite loop for continuous load generation
+      iteration = 0
+      while True:
+        iteration += 1
         try:
             start_time = time.time()  # Start time measurement
             self.driver.get(self.target_url)
@@ -89,12 +92,12 @@ class MyTestCase(unittest.TestCase):
             self.driver.find_element(By.LINK_TEXT, "Log Off").click()
             end_time = time.time()  # End time measurement
             time_taken = end_time - start_time  # Calculate the time taken for this iteration
-            print(f"Iteration {i+1}: Time taken: {time_taken:.2f} seconds")
+            print(f"Iteration {iteration}: Time taken: {time_taken:.2f} seconds")
         except Exception as e:
             # Handle errors gracefully - log and continue to next iteration
             end_time = time.time()
             time_taken = end_time - start_time
-            print(f"Iteration {i+1}: ERROR after {time_taken:.2f}s - {type(e).__name__}: {str(e)[:100]}")
+            print(f"Iteration {iteration}: ERROR after {time_taken:.2f}s - {type(e).__name__}: {str(e)[:100]}")
             # Try to recover by navigating back to home
             try:
                 self.driver.get(self.target_url)
