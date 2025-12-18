@@ -11,6 +11,8 @@ LoadGen creates synthetic user activity on KonaKart e-commerce applications to g
 
 ## Quick Start (AWS Student Instances)
 
+**👉 For detailed student lab instructions, see [STUDENT_GUIDE.md](STUDENT_GUIDE.md)**
+
 ### Installation
 
 ```bash
@@ -31,8 +33,8 @@ This installs:
 # Start load generation (10 crawlers + 10 checkout flows)
 sudo /home/ubuntu/load/startload.sh
 
-# Check if running
-ps aux | grep python3 | grep -E "(kk4|test_checkout)"
+# Check if running (should see 20 processes)
+ps aux | grep python3 | grep -E "(kk4|test_checkout)" | grep -v grep
 
 # Stop load generation
 sudo /home/ubuntu/load/stopload.sh
