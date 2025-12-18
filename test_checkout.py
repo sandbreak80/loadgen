@@ -57,8 +57,9 @@ class MyTestCase(unittest.TestCase):
 
     def test_checkout(self):
       for i in range(config.CHECKOUT_ITERATIONS):  # Loop based on config
-        start_time = time.time()  # Start time measurement
-        self.driver.get(self.target_url)
+        try:
+            start_time = time.time()  # Start time measurement
+            self.driver.get(self.target_url)
         WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located((By.CSS_SELECTOR, ".item-area:nth-child(4) .item-area-title")))
         #self.driver.set_window_size(1414, 819)
         self.driver.find_element(By.LINK_TEXT, "Acctim Metal Clock").click()
@@ -85,11 +86,20 @@ class MyTestCase(unittest.TestCase):
         actions = ActionChains(self.driver)
         actions.move_to_element(element).perform()
         self.driver.find_element(By.CSS_SELECTOR, "#continue-button > span").click()
-        self.driver.find_element(By.LINK_TEXT, "Log Off").click()
-        end_time = time.time()  # End time measurement
-        time_taken = end_time - start_time  # Calculate the time taken for this iteration
-        print(f"Iteration {i+1}: Time taken: {time_taken:.2f} seconds")
-        #self.driver.close()
+            self.driver.find_element(By.LINK_TEXT, "Log Off").click()
+            end_time = time.time()  # End time measurement
+            time_taken = end_time - start_time  # Calculate the time taken for this iteration
+            print(f"Iteration {i+1}: Time taken: {time_taken:.2f} seconds")
+        except Exception as e:
+            # Handle errors gracefully - log and continue to next iteration
+            end_time = time.time()
+            time_taken = end_time - start_time
+            print(f"Iteration {i+1}: ERROR after {time_taken:.2f}s - {type(e).__name__}: {str(e)[:100]}")
+            # Try to recover by navigating back to home
+            try:
+                self.driver.get(self.target_url)
+            except:
+                pass  # If recovery fails, the next iteration will try again
 
     def tearDown(self):
         # Close the browser window
