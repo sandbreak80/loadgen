@@ -12,6 +12,6 @@ sleep 2
 
 # This loop will start 10 instances of test_checkout.py using nohup and suppress their output
 for i in {1..10}; do
-   nohup python3 t/home/ubuntu/load/est_checkout.py >/dev/null 2>&1 &
+   nohup python3 /home/ubuntu/load/test_checkout.py >/dev/null 2>&1 &
    echo "Instance $i of test_checkout.py load generation started successfully"
 done

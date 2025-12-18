@@ -8,32 +8,42 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+import config
 
 
 # Function to get the EC2 public hostname
 def get_ec2_public_hostname():
     try:
-        result = subprocess.check_output(['ec2metadata', '--public-hostname'])
+        result = subprocess.check_output(['ec2metadata', '--public-hostname'], timeout=2)
         return result.decode('utf-8').strip()
-    except subprocess.CalledProcessError as e:
-        print(f"Error retrieving EC2 public hostname: {e}")
+    except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired) as e:
+        print(f"Not running on EC2 or ec2metadata not available: {e}")
         return None
 
-# Use the EC2 public hostname as the base URL
+# Use the EC2 public hostname as the base URL (for AWS deployments)
+# Otherwise use the configured target URL
 ec2_public_hostname = get_ec2_public_hostname()
 if ec2_public_hostname:
-    base_url = f"http://{ec2_public_hostname}:8780/konakart/Welcome.action"  # Adjust the URL as needed
+    base_url = f"http://{ec2_public_hostname}:8780/konakart/Welcome.action"
 else:
-    base_url = "http://localhost/"  # Fallback to localhost or some default
+    # Use configured URL from config.py
+    base_url = config.TARGET_URL
+    print(f"Using configured target URL: {base_url}")
 
 # Configuration
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
-#base_url = "http://localhost:8780/konakart/Welcome.action"
-chrome_driver_path = "/home/ubuntu/load/chromedriver-linux64/chromedriver"
-service = Service(chrome_driver_path)
+chrome_options.add_argument("--ignore-certificate-errors")  # For HTTPS student instances
+
+# Use configured ChromeDriver path or auto-detect
+if config.CHROMEDRIVER_PATH:
+    service = Service(config.CHROMEDRIVER_PATH)
+else:
+    # Auto-detect ChromeDriver using webdriver-manager
+    service = Service(ChromeDriverManager().install())
 
 # Initialize the driver
 driver = webdriver.Chrome(service=service, options=chrome_options)

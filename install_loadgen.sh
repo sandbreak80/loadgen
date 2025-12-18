@@ -33,11 +33,8 @@ sudo apt -f install -y
 # Install python3-pip
 sudo apt install -y python3-pip
 
-# Install Python packages using pip3
-pip3 install requests beautifulsoup4
-pip3 install selenium
-pip3 install webdriver-manager
-pip3 install pytest
+# Install Python packages using pip3 from requirements.txt
+pip3 install -r /home/ubuntu/load/requirements.txt
 
 # Download chromedriver
 sudo wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chromedriver-linux64.zip -P /home/ubuntu/load

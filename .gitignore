@@ -1,0 +1,48 @@
+# Log files
+logs/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environment (local development only)
+venv/
+env/
+ENV/
+.venv/
+
+# ChromeDriver
+chromedriver*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Credentials (if using .env files)
+.env
+secrets/
+
+# Local testing scripts (not needed on student instances)
+test_single_page.py
+test_single_checkout.py
+test_crawler_quick.sh
+test_remote.sh
+deploy_to_remote.sh
+remote_commands.sh
+run_timed_test.sh
+.ssh_config_example
+
+# SSH keys (never commit!)
+*.pem
+*.key
+
