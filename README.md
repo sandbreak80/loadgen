@@ -107,6 +107,16 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture docum
 - 2GB+ RAM recommended
 - Internet connectivity
 
+## SSL Certificate Handling
+
+LoadGen is designed for lab environments and handles SSL certificate errors automatically:
+
+- **The Issue:** KonaKart's SSL certificate may not match the EC2 public hostname
+- **The Solution:** Chrome runs with `--ignore-certificate-errors` flag
+- **Result:** Load generation works despite certificate mismatches
+
+This is **expected behavior** for lab/demo environments. In production, proper SSL certificates should be used.
+
 ## Troubleshooting
 
 ### Chrome/ChromeDriver Issues
