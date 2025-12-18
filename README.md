@@ -60,8 +60,8 @@ See [docs/SETUP.md](docs/SETUP.md) for local development instructions.
 
 LoadGen automatically adapts to its environment:
 
-- **On AWS EC2:** Tests the local KonaKart instance (localhost:8780)
-- **Local Dev:** Targets remote instances via configuration (port 8783)
+- **On AWS EC2:** Tests the local KonaKart instance (localhost:8783 HTTPS)
+- **Local Dev:** Targets remote instances via configuration (port 8783 HTTPS)
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture documentation.
 
